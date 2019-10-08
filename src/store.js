@@ -8,9 +8,11 @@ export default new Vuex.Store({
     title: '원래 제목'
   },
   mutations: {
+
     setTitle (state, p) {
       state.title = p
     }
+    
   },
   actions: {
 
