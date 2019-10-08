@@ -36,12 +36,12 @@
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="lime">
+    <v-toolbar color="indigo" dark>
       <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>{{ $store.state.title }}</v-toolbar-title>
+      <v-toolbar-title>{{ $store.state.user ? $store.state.user.displayName:'로그인 안함' }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn icon>
+        <v-btn icon @click="signOut">
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -101,7 +101,11 @@ export default {
   methods: {
     test () {
 
-    }
+    },
+    async signOut(){
+        const r =  await this.$firebase.auth().signOut()
+        console.log(r)
+      }
   }
 }
 </script>
