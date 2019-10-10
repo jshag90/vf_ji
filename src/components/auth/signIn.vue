@@ -6,7 +6,7 @@
                 <v-spacer></v-spacer>
                 <span class="caption">
                     또는&nbsp;
-                    <a>회원가입</a>
+                    <a @click="$emit('changeType')">회원가입</a>
                 </span>
             </v-card-title>
             <v-card-actions>
@@ -30,8 +30,19 @@
                 </v-layout>
             </v-container>
             <v-card-text>
-                <v-text-field label="이메일"></v-text-field>
-                <v-text-field label="비밀번호"></v-text-field>
+                <v-text-field 
+                  label="이메일"
+                  v-model="form.email"
+                  :rules="[rule.required, rule.minLength(7),  rule.maxLength(50),  rule.email]"
+                  required
+                  ></v-text-field>
+                  <v-text-field 
+                  label="비밀번호"
+                   v-model="form.password"
+                  :rules="[rule.required, rule.minLength(6),  rule.maxLength(50)]"
+                  type="password"
+                   required
+                  ></v-text-field>
             </v-card-text>
             <!-- <div >이 페이지는 ~~</div> -->
 
@@ -39,7 +50,7 @@
                 <v-checkbox label="로그인 정보저장" v-model="value" value="value">
                 </v-checkbox>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">로그인</v-btn>
+                <v-btn color="primary" :disabled="!valid" @click="signInWithEmailAndPassword">로그인</v-btn>
             </v-card-actions>
         </v-form>
     </v-card>
@@ -48,6 +59,20 @@
 export default {
     data(){
         return {
+             form : {
+                firstName:'',
+                lastName: '',
+                email: '',
+                password:''
+            },
+            agree: false,
+            rule : {
+                required:  v => !!v || '필수 항목입니다.',
+                minLength: length => v => v.length >= length || `${length}자리 이상으로 입력하세요.`,
+                maxLength: length => v => v.length <= length || `${length}자리 이하로 입력하세요.`,
+                email:  v => /.+@.+/.test(v) || '이메일 형식에 맞지 않습니다.',
+                agree: v => !!v || '약관에 동의해야 진행됩니다.',
+            },
             valid: false
         }
     },
@@ -57,6 +82,10 @@ export default {
           this.$firebase.auth().languageCode = 'ko';
           const r = await this.$firebase.auth().signInWithPopup(provider)
           console.log(r)
+      },
+      signInWithEmailAndPassword(){
+           if(!this.$refs.form.validate()) return this.$toasted.global.error('입력 폼을 올바르게 작성해주세요.')
+          alert('ok')
       }
     }
 }

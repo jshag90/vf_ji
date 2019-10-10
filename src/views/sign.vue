@@ -36,8 +36,8 @@
         <v-img src="https://cfl.dropboxstatic.com/static/images/index/zeus/home-hero-vflUW4JkN.jpg"/>
       </v-flex>
       <v-flex xs12 sm5>
-          <sign-in v-if="type"></sign-in>
-          <sign-up v-else></sign-up>
+          <sign-in v-if="type" @changeType="type = !type"></sign-in>
+          <sign-up v-else @changeType="type = !type"></sign-up>
       </v-flex>
     </v-layout>
   </v-container>

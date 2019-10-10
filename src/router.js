@@ -67,12 +67,14 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   console.log('bf each')
+  Vue.prototype.$Progress.start()
   if(Vue.prototype.$isFirebaseAuth) next() 
+
 })
 
-// router.afterEach((to, from, next) => {
-//   console.log('af each')
-//   next() 
-// })
+router.afterEach((to, from, next) => {
+  Vue.prototype.$Progress.finish()
+  next() 
+})
 
 export default router
