@@ -48,6 +48,7 @@
     </v-toolbar>
 
     <v-content>
+      <vue-progress-bar></vue-progress-bar>
       <router-view/>
     </v-content>
   </v-app>
@@ -104,7 +105,8 @@ export default {
     },
     async signOut(){
         const r =  await this.$firebase.auth().signOut()
-        console.log(r)
+        // console.log(r)
+        // this.$Progress.start()
       }
   }
 }

@@ -7,8 +7,8 @@
         <my-doughter></my-doughter>
         <v-card-text>
             <v-alert
-            v-model="call"
-            type="success"
+              v-model="call"
+              type="success"
             >
                 This is a success alert.
             </v-alert>
