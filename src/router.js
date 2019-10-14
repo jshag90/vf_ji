@@ -20,7 +20,7 @@ const router = new Router({
     {
       path: '/sign',
       name: 'sign',
-      component: () => import(/* webpackChunkName: "about" */ './views/sign.vue')
+      component: () => import('./views/sign.vue')
     },
     {
       path: '/about',
@@ -52,11 +52,11 @@ const router = new Router({
     },
     {
       path: '/lectures/mother',
-      component: () => import('./views/lectures/mother.vue')
+      component: () => import('./views/lectures/mother')
     },
     {
       path: '/lectures/vuex',
-      component: () => import('./views/lectures/vuex.vue')
+      component: () => import('./views/lectures/vuex')
     },
     {
       path: '*',
@@ -66,15 +66,11 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('bf each')
   Vue.prototype.$Progress.start()
-  if(Vue.prototype.$isFirebaseAuth) next() 
-
+  if (Vue.prototype.$isFirebaseAuth) next()
 })
-
-router.afterEach((to, from, next) => {
+router.afterEach((to, from) => {
   Vue.prototype.$Progress.finish()
-  next() 
 })
 
 export default router

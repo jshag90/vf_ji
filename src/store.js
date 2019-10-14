@@ -10,27 +10,24 @@ export default new Vuex.Store({
     token: ''
   },
   mutations: {
-
     setTitle (state, p) {
       state.title = p
     },
-    setUser(state, user){
+    setUser (state, user) {
       state.user = user
     },
-    setToken(state, token){
+    setToken (state, token) {
       state.token = token
     }
-    
   },
   actions: {
-    getUser({commit}, user){
+    getUser ({ commit }, user) {
       commit('setUser', user)
-      if(!user) return 
+      if (!user) return
       user.getIdToken()
         .then(token => {
           commit('setToken', token)
         })
     }
-
   }
 })

@@ -1,5 +1,5 @@
 <template>
-    <div>
-        딸 1
-    </div>
+  <div>
+    딸 1
+  </div>
 </template>

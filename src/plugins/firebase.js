@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import * as firebase from 'firebase/app'
-import firebaseConfig from '../../src/firebaseConfig'
+import firebaseConfig from '../../firebaseConfig'
 import store from '../store'
 import router from '../router'
 
@@ -19,13 +19,13 @@ Vue.prototype.$firebase = firebase
 Vue.prototype.$isFirebaseAuth = false
 
 firebase.auth().onAuthStateChanged((user) => {
-    Vue.prototype.$isFirebaseAuth = true
-    console.log(user)
-    if(user){
-        router.push('/')
-    } else{
-        router.push('/sign')
-    }
-    // store.commit('setUser', user)
-    store.dispatch('getUser', user)
-  });
+  Vue.prototype.$isFirebaseAuth = true
+  console.log(user)
+  if (user) {
+    router.push('/')
+  } else {
+    router.push('/sign')
+  }
+  // store.commit('setUser', user)
+  store.dispatch('getUser', user)
+})
