@@ -13,3 +13,11 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 })
 
 exports.test = functions.https.onRequest(require('./test'))
+
+exports.creatUser = functions.auth.user().onCreate((user) => {
+  let set = { level: 2 }
+  if (functions.config().admin.email === user.email && user.emailVerified) set.level = 0
+  admin.auth().setCustomUserClaims(user.uid, set).then(() => {
+
+  })
+})
